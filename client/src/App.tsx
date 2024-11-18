@@ -1,10 +1,10 @@
 import './App.css'
-import Login from './pages/Login'
+import NewEmployeeModal from './components/Employees/Form/NewEmployeeModal'
 function App() {
 
   return (
     <div>
-      <Login/>
+      <NewEmployeeModal/>
     </div>
   )
 }
