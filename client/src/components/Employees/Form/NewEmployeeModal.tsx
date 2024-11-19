@@ -79,9 +79,7 @@ export default function NewEmployeeModal() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        console.log(employee.enterprise_id)
-        console.log(employee.work_id)
-        console.log(employee.role_id)
+
 
         axios
             .post("http://localhost:8080/api/employees", {
@@ -90,9 +88,9 @@ export default function NewEmployeeModal() {
                 birthDate: employee.birthDate,
                 cpf: employee.cpf,
                 phoneNumber: employee.phoneNumber,
-                enterprise: {id: employee.enterprise_id},
-                work: {id: employee.work_id},
-                role: {id: employee.role_id}
+                enterprise: { id: employee.enterprise_id },
+                work: { id: employee.work_id },
+                role: { id: employee.role_id }
 
             })
             .then((response) => {
@@ -175,10 +173,11 @@ export default function NewEmployeeModal() {
                 />
                 <SelectInputField
                     label="Empresa"
-                    value={employee.enterprise_id}
+                    value={employee.enterprise_id || 0}
                     onChange={(e) => handleSelectChange(e, "enterprise_id")}
-                    options={enterprises}
+                    options={enterprises || []} // Garante que options seja um array
                 />
+
             </div>
 
             <Button type="submit" text="Cadastrar" />
