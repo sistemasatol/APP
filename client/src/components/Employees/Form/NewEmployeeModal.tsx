@@ -82,8 +82,31 @@ export default function NewEmployeeModal() {
         console.log(employee.enterprise_id)
         console.log(employee.work_id)
         console.log(employee.role_id)
+
+        axios
+            .post("http://localhost:8080/api/employees", {
+                name: employee.name,
+                lastName: employee.lastName,
+                birthDate: employee.birthDate,
+                cpf: employee.cpf,
+                phoneNumber: employee.phoneNumber,
+                enterprise: {id: employee.enterprise_id},
+                work: {id: employee.work_id},
+                role: {id: employee.role_id}
+
+            })
+            .then((response) => {
+                alert("Colaborador cadastrado com sucesso!");
+                console.log(response);
+            })
+            .catch((error) => {
+                console.error("Erro ao cadastrar colaborador:", error.response || error);
+                alert("Erro ao cadastrar colaborador.");
+            });
+
+
         console.log("Employee data to post:", employee);
-        // Aqui você pode enviar os dados para o backend
+
     };
 
     return (
