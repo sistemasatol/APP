@@ -10,9 +10,9 @@ interface Employee {
     cpf: string;
     phoneNumber: string;
     birthDate: string;
-    work_id: number;  
-    enterprise_id: number;  
-    role_id: number;  
+    work_id: number;
+    enterprise_id: number;
+    role_id: number;
 }
 
 export default function NewEmployeeModal() {
@@ -54,16 +54,40 @@ export default function NewEmployeeModal() {
 
     useEffect(() => {
         // Função para buscar os dados
-        const fetchData = async () => {
+        const fetchData = () => {
             try {
-                const worksResponse = await axios.get("http://localhost:8080/api/works");
-                setWorks(worksResponse.data);
+                axios.get('http://localhost:8080/api/works')
+                    .then(function (response) {
+                        console.log("Works carregadas")
+                        console.log(response.data)
+                        setWorks(response.data);
+                    })
+                    .catch(function (error) {
 
-                const enterprisesResponse = await axios.get("http://localhost:8080/api/enterprises");
-                setEnterprises(enterprisesResponse.data);
+                        console.log(error);
+                    })
 
-                const rolesResponse = await axios.get("http://localhost:8080/api/roles");
-                setRoles(rolesResponse.data);
+                axios.get('http://localhost:8080/api/enterprises')
+                    .then(function (response) {
+                        console.log("Enterprises carregadas")
+                        console.log(response.data)
+                        setEnterprises(response.data);
+                    })
+                    .catch(function (error) {
+
+                        console.log(error);
+                    })
+
+                axios.get('http://localhost:8080/api/roles')
+                    .then(function (response) {
+                        console.log("Roles carregadas")
+                        console.log(response.data)
+                        setRoles(response.data);
+                    })
+                    .catch(function (error) {
+
+                        console.log(error);
+                    })
             } catch (error: any) {
                 console.error(
                     "Erro ao buscar dados",
@@ -86,9 +110,9 @@ export default function NewEmployeeModal() {
                 birthDate: employee.birthDate,
                 cpf: employee.cpf,
                 phoneNumber: employee.phoneNumber,
-                role: {id: employee.role_id},
-                work: {id: employee.work_id},
-                enterprise: {id: employee.enterprise_id}
+                role: { id: employee.role_id },
+                work: { id: employee.work_id },
+                enterprise: { id: employee.enterprise_id }
             });
             console.log("Funcionário cadastrado com sucesso", response.data);
             // Aqui você pode limpar o formulário ou mostrar um sucesso para o usuário
@@ -96,10 +120,6 @@ export default function NewEmployeeModal() {
             console.error("Erro ao Cadastrar Funcionário", error.response ? error.response.data : error.message);
         }
     }
-
-
-
-
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto p-4">
