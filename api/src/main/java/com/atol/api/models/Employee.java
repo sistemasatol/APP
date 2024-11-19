@@ -12,6 +12,9 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public Employee() {
+    }
+
     private String name, lastName, cpf, phoneNumber, birthDate;
 
     @ManyToOne

@@ -10,9 +10,9 @@ interface Employee {
     cpf: string;
     phoneNumber: string;
     birthDate: string;
-    work_id: number;  // Alterado para permitir undefined
-    enterprise_id: number;  // Alterado para permitir undefined
-    role_id: number;  // Alterado para permitir undefined
+    work_id: number;  
+    enterprise_id: number;  
+    role_id: number;  
 }
 
 export default function NewEmployeeModal() {
@@ -76,36 +76,30 @@ export default function NewEmployeeModal() {
     }, []);
 
     // Função para submeter o formulário
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-
-
-        axios
-            .post("http://localhost:8080/api/employees", {
+        try {
+            const response = await axios.post("http://localhost:8080/api/employees", {
                 name: employee.name,
                 lastName: employee.lastName,
                 birthDate: employee.birthDate,
                 cpf: employee.cpf,
                 phoneNumber: employee.phoneNumber,
-                enterprise: { id: employee.enterprise_id },
-                work: { id: employee.work_id },
-                role: { id: employee.role_id }
-
-            })
-            .then((response) => {
-                alert("Colaborador cadastrado com sucesso!");
-                console.log(response);
-            })
-            .catch((error) => {
-                console.error("Erro ao cadastrar colaborador:", error.response || error);
-                alert("Erro ao cadastrar colaborador.");
+                role: {id: employee.role_id},
+                work: {id: employee.work_id},
+                enterprise: {id: employee.enterprise_id}
             });
+            console.log("Funcionário cadastrado com sucesso", response.data);
+            // Aqui você pode limpar o formulário ou mostrar um sucesso para o usuário
+        } catch (error: any) {
+            console.error("Erro ao Cadastrar Funcionário", error.response ? error.response.data : error.message);
+        }
+    }
 
 
-        console.log("Employee data to post:", employee);
 
-    };
+
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto p-4">
@@ -173,11 +167,10 @@ export default function NewEmployeeModal() {
                 />
                 <SelectInputField
                     label="Empresa"
-                    value={employee.enterprise_id || 0}
+                    value={employee.enterprise_id}
                     onChange={(e) => handleSelectChange(e, "enterprise_id")}
-                    options={enterprises || []} // Garante que options seja um array
+                    options={enterprises}
                 />
-
             </div>
 
             <Button type="submit" text="Cadastrar" />
