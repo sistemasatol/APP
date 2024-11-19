@@ -15,7 +15,10 @@ public class Employee {
     public Employee() {
     }
 
-    private String name, lastName, cpf, phoneNumber, birthDate;
+    private String name, lastName,  phoneNumber, birthDate;
+
+    @Column(unique = true)
+    private String cpf;
 
     @ManyToOne
     @JoinColumn(name = "enterprise_id", nullable = false)
@@ -27,5 +30,5 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "work_id", nullable = false)
-    private Work work; // Relacionamento com Work
+    private Work work;
 }
