@@ -139,8 +139,8 @@ export default function NewEmployeeModal() {
                 onClose={() => setModalOpen(false)}
                 title="Cadastrar Novo Funcionário"
             >
-                <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto p-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-2 max-w-4xl mx-auto p-4">
+                    <div className="grid grid-cols-1 md:grid-cols-1 gap-1">
                         <InputField
                             placeholder="Digite o Nome"
                             type="text"
@@ -157,9 +157,7 @@ export default function NewEmployeeModal() {
                             value={employee.lastName}
                             onChange={handleChange}
                         />
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <InputField
                             placeholder="Digite o CPF"
                             type="text"
@@ -176,9 +174,7 @@ export default function NewEmployeeModal() {
                             value={employee.phoneNumber}
                             onChange={handleChange}
                         />
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <InputField
                             placeholder="Digite a Data de Nascimento"
                             type="date"
@@ -187,9 +183,9 @@ export default function NewEmployeeModal() {
                             value={employee.birthDate}
                             onChange={handleChange}
                         />
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+
                         <SelectInputField
                             label="Obra"
                             value={employee.work_id}
@@ -208,6 +204,7 @@ export default function NewEmployeeModal() {
                             onChange={(e) => handleSelectChange(e, "enterprise_id")}
                             options={enterprises}
                         />
+
                     </div>
 
                     <Button type="submit" text="Cadastrar" />
@@ -216,6 +213,6 @@ export default function NewEmployeeModal() {
             </Modal>
 
 
-        </div>
+        </div >
     );
 }

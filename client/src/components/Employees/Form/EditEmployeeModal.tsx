@@ -120,8 +120,8 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
 
     return (
         <Modal isOpen={true} onClose={onClose} title="Editar Funcionário">
-            <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto p-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-4">
+                <div className="grid grid-cols-1 md:grid-cols-1">
                     <InputField
                         placeholder="Digite o Nome"
                         type="text"
@@ -138,9 +138,9 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
                         value={updatedEmployee.lastName}
                         onChange={handleChange}
                     />
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
                     <InputField
                         placeholder="Digite o CPF"
                         type="text"
@@ -157,9 +157,9 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
                         value={updatedEmployee.phoneNumber}
                         onChange={handleChange}
                     />
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
                     <InputField
                         placeholder="Digite a Data de Nascimento"
                         type="date"
@@ -168,9 +168,9 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
                         value={updatedEmployee.birthDate}
                         onChange={handleChange}
                     />
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+
                     <SelectInputField
                         label="Obra"
                         value={updatedEmployee.work.id}
