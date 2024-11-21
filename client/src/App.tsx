@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route element={<Employees />} path="/funcionarios" />
           <Route element={<Enterprises />} path="/empresas" />
+          <Route element={<Enterprises />} path="/funcoes" />
         </Routes>
       </BrowserRouter>
 

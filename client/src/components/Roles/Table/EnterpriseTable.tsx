@@ -16,10 +16,8 @@ const EnterpriseTable: React.FC = () => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [enterpriseToDelete, setEnterpriseToDelete] = useState<Enterprise | null>(null);
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
     useEffect(() => {
-        fetch(`${backendUrl}/enterprises`)
+        fetch("http://localhost:8080/api/enterprises")
             .then((response) => response.json())
             .then((json) => {
                 const formattedData: Enterprise[] = json.map((enterprise: any) => ({
@@ -48,7 +46,7 @@ const EnterpriseTable: React.FC = () => {
     // Função para excluir a empresa
     const deleteEnterprise = async (id: number) => {
         try {
-            await axios.delete(`${backendUrl}/api/enterprises/${id}`);
+            await axios.delete(`http://localhost:8080/api/enterprises/${id}`);
             setData(data.filter((enterprise) => enterprise.id !== id));
             setIsDeleteModalOpen(false);
             console.log("Empresa excluída com sucesso");

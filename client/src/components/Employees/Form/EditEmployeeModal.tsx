@@ -38,6 +38,8 @@ interface EditEmployeeModalProps {
     onUpdate: (updatedEmployee: Employee) => void;
 }
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose, onUpdate }) => {
     const [works, setWorks] = useState<Work[]>([]); // Alterando para Work[]
     const [roles, setRoles] = useState<Role[]>([]); // Alterando para Role[]
@@ -98,7 +100,7 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
 
         try {
             const response = await axios.put(
-                `http://localhost:8080/api/employees/${employee.id}`,
+                `${backendUrl}/employees/${employee.id}`,
                 {
                     name: updatedEmployee.name,
                     lastName: updatedEmployee.lastName,

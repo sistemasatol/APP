@@ -4,20 +4,15 @@ import Button from "./Button";
 import Modal from "./Modal";
 import axios from "axios";
 
-interface Enterprise {
+interface Role {
   name: string;
   phoneNumber: string;
   cnpj: string;
 }
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
-
-export default function NewEnterpriseModal() {
-  const [enterprise, setEnterprise] = useState<Enterprise>({
+export default function NewRoleModal() {
+  const [role, setRole] = useState<Role>({
     name: "",
-    cnpj: "",
-    phoneNumber: "",
   });
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -34,7 +29,7 @@ export default function NewEnterpriseModal() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${backendUrl}/enterprises`, {
+      const response = await axios.post("http://localhost:8080/api/enterprises", {
         name: enterprise.name,
         phoneNumber: enterprise.phoneNumber,
         cnpj: enterprise.cnpj,

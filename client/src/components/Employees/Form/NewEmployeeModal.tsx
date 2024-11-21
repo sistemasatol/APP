@@ -16,6 +16,8 @@ interface Employee {
     role_id: number;
 }
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export default function NewEmployeeModal() {
     const [works, setWorks] = useState<{ id: number; name: string }[]>([]);
     const [roles, setRoles] = useState<{ id: number; name: string }[]>([]);
@@ -59,7 +61,7 @@ export default function NewEmployeeModal() {
         // Função para buscar os dados
         const fetchData = () => {
             try {
-                axios.get('http://localhost:8080/api/works')
+                axios.get(`${backendUrl}/works`)
                     .then(function (response) {
                         console.log("Works carregadas")
                         console.log(response.data)
@@ -70,7 +72,7 @@ export default function NewEmployeeModal() {
                         console.log(error);
                     })
 
-                axios.get('http://localhost:8080/api/enterprises')
+                axios.get(`${backendUrl}/enterprises`)
                     .then(function (response) {
                         console.log("Enterprises carregadas")
                         console.log(response.data)
@@ -81,7 +83,7 @@ export default function NewEmployeeModal() {
                         console.log(error);
                     })
 
-                axios.get('http://localhost:8080/api/roles')
+                axios.get(`${backendUrl}/roles`)
                     .then(function (response) {
                         console.log("Roles carregadas")
                         console.log(response.data)
@@ -107,7 +109,7 @@ export default function NewEmployeeModal() {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:8080/api/employees", {
+            const response = await axios.post(`${backendUrl}/employees`, {
                 name: employee.name,
                 lastName: employee.lastName,
                 birthDate: employee.birthDate,

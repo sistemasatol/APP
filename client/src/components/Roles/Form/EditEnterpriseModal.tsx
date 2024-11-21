@@ -16,9 +16,6 @@ interface EditEnterpriseModalProps {
     onUpdate: (updatedEnterprise: Enterprise) => void;
 }
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
-
 const EditEnterpriseModal: React.FC<EditEnterpriseModalProps> = ({ enterprise, onClose, onUpdate }) => {
     const [updatedEnterprise, setUpdatedEnterprise] = useState<Enterprise>(enterprise);
 
@@ -34,7 +31,7 @@ const EditEnterpriseModal: React.FC<EditEnterpriseModalProps> = ({ enterprise, o
         e.preventDefault();
 
         try {
-            const response = await axios.put(`${backendUrl}/enterprises/${enterprise.id}`, updatedEnterprise);
+            const response = await axios.put(`http://localhost:8080/api/enterprises/${enterprise.id}`, updatedEnterprise);
             console.log("Empresa atualizada com sucesso", response.data);
             onUpdate(response.data); // Atualiza a empresa na tabela
             onClose(); // Fecha o modal

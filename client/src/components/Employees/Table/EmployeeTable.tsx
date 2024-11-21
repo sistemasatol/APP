@@ -16,6 +16,7 @@ interface Employee {
 }
 
 const EmployeeTable: React.FC = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [data, setData] = useState<Employee[]>([]);
     const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null); // Estado para controlar o funcionário selecionado
     const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar a visibilidade do modal de edição
@@ -23,7 +24,7 @@ const EmployeeTable: React.FC = () => {
     const [employeeToDelete, setEmployeeToDelete] = useState<Employee | null>(null); // Funcionário a ser excluído
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/employees")
+        fetch(`${backendUrl}/employees`)
             .then((response) => response.json())
             .then((json) => {
                 const formattedData: Employee[] = json.map((employee: any) => ({
@@ -72,7 +73,7 @@ const EmployeeTable: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (employeeToDelete) {
             try {
-                await fetch(`http://localhost:8080/api/employees/${employeeToDelete.id}`, {
+                await fetch(`${backendUrl}/employees/${employeeToDelete.id}`, {
                     method: "DELETE",
                 });
                 // Atualize a lista de funcionários após a exclusão
