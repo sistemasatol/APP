@@ -34,4 +34,8 @@ public class EmployeeService {
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
     }
+
+    public List<Employee> findByWorkId(Long work_id) {
+        return employeeRepository.findByWorkId(work_id);
+    }
 }

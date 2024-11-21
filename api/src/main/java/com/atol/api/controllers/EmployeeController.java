@@ -17,9 +17,16 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    // Método para buscar todos os funcionários
     @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
+    }
+
+    // Método para buscar funcionários filtrados por workId
+    @GetMapping("/work")  // Mudança aqui para '/work' para filtrar por workId
+    public List<Employee> getEmployeeByWorkId(@RequestParam Long workId) {
+        return employeeService.findByWorkId(workId);
     }
 
     @GetMapping("/{id}")
@@ -45,3 +52,4 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 }
+
