@@ -3,6 +3,7 @@ import SelectInputField from "./SelectInputField";
 import Button from "./Button";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Modal from "./Modal";
 
 interface Employee {
     name: string;
@@ -30,6 +31,8 @@ export default function NewEmployeeModal() {
         enterprise_id: 0,
         role_id: 0,
     });
+
+    const [isModalOpen, setModalOpen] = useState(false)
 
     // Função para lidar com mudanças nos campos do formulário
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,78 +125,97 @@ export default function NewEmployeeModal() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto p-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <InputField
-                    placeholder="Digite o Nome"
-                    type="text"
-                    label="Nome"
-                    name="name"
-                    value={employee.name}
-                    onChange={handleChange}
-                />
-                <InputField
-                    placeholder="Digite o Sobrenome"
-                    type="text"
-                    label="Sobrenome"
-                    name="lastName"
-                    value={employee.lastName}
-                    onChange={handleChange}
-                />
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <InputField
-                    placeholder="Digite o CPF"
-                    type="text"
-                    label="CPF"
-                    name="cpf"
-                    value={employee.cpf}
-                    onChange={handleChange}
-                />
-                <InputField
-                    placeholder="Digite o Número de Telefone"
-                    type="text"
-                    label="Telefone"
-                    name="phoneNumber"
-                    value={employee.phoneNumber}
-                    onChange={handleChange}
-                />
-            </div>
+        <div className="p-4">
+            <button
+                onClick={() => setModalOpen(true)}
+                className="px-4 py-2 bg-blue-600 text-white rounded"
+            >
+                Cadastrar Novo Funcionário
+            </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <InputField
-                    placeholder="Digite a Data de Nascimento"
-                    type="date"
-                    label="Data de Nascimento"
-                    name="birthDate"
-                    value={employee.birthDate}
-                    onChange={handleChange}
-                />
-            </div>
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setModalOpen(false)}
+                title="Cadastrar Novo Funcionário"
+            >
+                <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto p-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <InputField
+                            placeholder="Digite o Nome"
+                            type="text"
+                            label="Nome"
+                            name="name"
+                            value={employee.name}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            placeholder="Digite o Sobrenome"
+                            type="text"
+                            label="Sobrenome"
+                            name="lastName"
+                            value={employee.lastName}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <SelectInputField
-                    label="Obra"
-                    value={employee.work_id}
-                    onChange={(e) => handleSelectChange(e, "work_id")}
-                    options={works}
-                />
-                <SelectInputField
-                    label="Função"
-                    value={employee.role_id}
-                    onChange={(e) => handleSelectChange(e, "role_id")}
-                    options={roles}
-                />
-                <SelectInputField
-                    label="Empresa"
-                    value={employee.enterprise_id}
-                    onChange={(e) => handleSelectChange(e, "enterprise_id")}
-                    options={enterprises}
-                />
-            </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <InputField
+                            placeholder="Digite o CPF"
+                            type="text"
+                            label="CPF"
+                            name="cpf"
+                            value={employee.cpf}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            placeholder="Digite o Número de Telefone"
+                            type="text"
+                            label="Telefone"
+                            name="phoneNumber"
+                            value={employee.phoneNumber}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-            <Button type="submit" text="Cadastrar" />
-        </form>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <InputField
+                            placeholder="Digite a Data de Nascimento"
+                            type="date"
+                            label="Data de Nascimento"
+                            name="birthDate"
+                            value={employee.birthDate}
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <SelectInputField
+                            label="Obra"
+                            value={employee.work_id}
+                            onChange={(e) => handleSelectChange(e, "work_id")}
+                            options={works}
+                        />
+                        <SelectInputField
+                            label="Função"
+                            value={employee.role_id}
+                            onChange={(e) => handleSelectChange(e, "role_id")}
+                            options={roles}
+                        />
+                        <SelectInputField
+                            label="Empresa"
+                            value={employee.enterprise_id}
+                            onChange={(e) => handleSelectChange(e, "enterprise_id")}
+                            options={enterprises}
+                        />
+                    </div>
+
+                    <Button type="submit" text="Cadastrar" />
+                </form>
+
+            </Modal>
+
+
+        </div>
     );
 }

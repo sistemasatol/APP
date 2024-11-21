@@ -12,7 +12,7 @@ interface InputFieldProps {
 const InputField: React.FC<InputFieldProps> = ({ label, type, value, name, placeholder, onChange }) => {
   return (
     <div className="mb-4 w-full">
-      <label className="block text-sm  mb-1 font-medium text-red-700">{label}</label>
+      <label className="block text-sm  mb-1 font-medium text-black">{label}</label>
       <input
         type={type}
         value={value}
