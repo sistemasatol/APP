@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import EditEnterpriseModal from "../Form/EditEnterpriseModal";
+import EditEnterpriseModal from "../Form/EditRoleModal";
 import DeleteConfirmationModal from "../Form/DeleteConfirmationModal";
-interface Enterprise {
+interface Role {
     id: number;
     name: string;
-    cnpj: string;
-    phoneNumber: string;
 }
 
-const EnterpriseTable: React.FC = () => {
-    const [data, setData] = useState<Enterprise[]>([]);
-    const [selectedEnterprise, setSelectedEnterprise] = useState<Enterprise | null>(null);
+const RoleTable: React.FC = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const [data, setData] = useState<Role[]>([]);
+    const [selectedRole, setSelectedRole] = useState<Role | null>(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [enterpriseToDelete, setEnterpriseToDelete] = useState<Enterprise | null>(null);
+    const [roleToDelete, setRoleToDelete] = useState<Role | null>(null);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/enterprises")
+        fetch(`${backendUrl}/roles`)
             .then((response) => response.json())
             .then((json) => {
-                const formattedData: Enterprise[] = json.map((enterprise: any) => ({
-                    id: enterprise.id,
-                    name: enterprise.name || "Nome não informado",
-                    cnpj: enterprise.cnpj || "CNPJ não informado",
-                    phoneNumber: enterprise.phoneNumber || "Número de Telefone não informado",
+                const formattedData: Role[] = json.map((role: any) => ({
+                    id: role.id,
+                    name: role.name || "Nome não informado",
+                   
                 }));
                 setData(formattedData);
             })
@@ -32,26 +30,26 @@ const EnterpriseTable: React.FC = () => {
     }, []);
 
     // Função para abrir o modal de edição
-    const handleEdit = (enterprise: Enterprise) => {
-        setSelectedEnterprise(enterprise);
+    const handleEdit = (role: Role) => {
+        setSelectedRole(role);
         setIsEditModalOpen(true);
     };
 
     // Função para abrir o modal de confirmação de exclusão
-    const handleDelete = (enterprise: Enterprise) => {
-        setEnterpriseToDelete(enterprise);
+    const handleDelete = (role: Role) => {
+        setRoleToDelete(role);
         setIsDeleteModalOpen(true);
     };
 
     // Função para excluir a empresa
     const deleteEnterprise = async (id: number) => {
         try {
-            await axios.delete(`http://localhost:8080/api/enterprises/${id}`);
-            setData(data.filter((enterprise) => enterprise.id !== id));
+            await axios.delete(`${backendUrl}/roles/${id}`);
+            setData(data.filter((role) => role.id !== id));
             setIsDeleteModalOpen(false);
-            console.log("Empresa excluída com sucesso");
+            console.log("Função excluída com sucesso");
         } catch (error) {
-            console.error("Erro ao excluir empresa", error);
+            console.error("Erro ao excluir função", error);
         }
     };
 
@@ -61,27 +59,24 @@ const EnterpriseTable: React.FC = () => {
                 <thead>
                     <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th className="py-3 px-6 text-left">Nome</th>
-                        <th className="py-3 px-6 text-left">CNPJ</th>
-                        <th className="py-3 px-6 text-left">Telefone</th>
                         <th className="py-3 px-6 text-left">Ações</th>
                     </tr>
+                    
                 </thead>
                 <tbody className="text-gray-600 text-sm font-light">
                     {data.length > 0 ? (
-                        data.map((enterprise) => (
-                            <tr key={enterprise.id} className="border-b border-gray-200 hover:bg-gray-100">
-                                <td className="py-3 px-6 text-left">{enterprise.name}</td>
-                                <td className="py-3 px-6 text-left">{enterprise.cnpj}</td>
-                                <td className="py-3 px-6 text-left">{enterprise.phoneNumber}</td>
+                        data.map((role) => (
+                            <tr key={role.id} className="border-b border-gray-200 hover:bg-gray-100">
+                                <td className="py-3 px-6 text-left">{role.name}</td>
                                 <td className="py-3 px-6 text-left">
                                     <button
-                                        onClick={() => handleEdit(enterprise)}
+                                        onClick={() => handleEdit(role)}
                                         className="text-blue-600 mr-2"
                                     >
                                         Editar
                                     </button>
                                     <button
-                                        onClick={() => handleDelete(enterprise)}
+                                        onClick={() => handleDelete(role)}
                                         className="text-red-600"
                                     >
                                         Excluir
@@ -100,13 +95,13 @@ const EnterpriseTable: React.FC = () => {
             </table>
 
             {/* Modal de edição */}
-            {isEditModalOpen && selectedEnterprise && (
+            {isEditModalOpen && selectedRole && (
                 <EditEnterpriseModal
-                    enterprise={selectedEnterprise}
+                    role={selectedRole}
                     onClose={() => setIsEditModalOpen(false)}
-                    onUpdate={(updatedEnterprise: Enterprise) => {
-                        setData(data.map((enterprise) =>
-                            enterprise.id === updatedEnterprise.id ? updatedEnterprise : enterprise
+                    onUpdate={(updatedRole: Role) => {
+                        setData(data.map((role) =>
+                            role.id === updatedRole.id ? updatedRole : role
                         ));
                         setIsEditModalOpen(false);
                     }}
@@ -114,15 +109,15 @@ const EnterpriseTable: React.FC = () => {
             )}
 
             {/* Modal de confirmação de exclusão */}
-            {isDeleteModalOpen && enterpriseToDelete && (
+            {isDeleteModalOpen && roleToDelete && (
                 <DeleteConfirmationModal
-                    enterprise={enterpriseToDelete}
+                    role={roleToDelete}
                     onClose={() => setIsDeleteModalOpen(false)}
-                    onConfirm={() => deleteEnterprise(enterpriseToDelete.id)}
+                    onConfirm={() => deleteEnterprise(roleToDelete.id)}
                 />
             )}
         </div>
     );
 };
 
-export default EnterpriseTable;
+export default RoleTable;
