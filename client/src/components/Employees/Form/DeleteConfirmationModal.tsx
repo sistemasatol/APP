@@ -1,15 +1,17 @@
 import React from "react";
 
 interface Employee {
+    id: number;
     name: string;
     lastName: string;
     cpf: string;
     phoneNumber: string;
     birthDate: string;
-    work_id: number;
-    enterprise_id: number;
-    role_id: number;
+    work: { name: string; id: number };
+    enterprise: { name: string; id: number };
+    role: { name: string; id: number };
 }
+
 
 interface DeleteConfirmationModalProps {
     employee: Employee;

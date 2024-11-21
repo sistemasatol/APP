@@ -5,6 +5,21 @@ import SelectInputField from "./SelectInputField"; // Componente de select
 import Button from "./Button";
 import Modal from "./Modal";
 
+interface Work {
+    id: number;
+    name: string;
+}
+
+interface Role {
+    id: number;
+    name: string;
+}
+
+interface Enterprise {
+    id: number;
+    name: string;
+}
+
 interface Employee {
     id: number;
     name: string;
@@ -12,9 +27,9 @@ interface Employee {
     cpf: string;
     phoneNumber: string;
     birthDate: string;
-    work_id: number;
-    enterprise_id: number;
-    role_id: number;
+    work: Work; // Alterando para objeto do tipo Work
+    enterprise: Enterprise; // Alterando para objeto do tipo Enterprise
+    role: Role; // Alterando para objeto do tipo Role
 }
 
 interface EditEmployeeModalProps {
@@ -24,9 +39,9 @@ interface EditEmployeeModalProps {
 }
 
 const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose, onUpdate }) => {
-    const [works, setWorks] = useState<{ id: number; name: string }[]>([]);
-    const [roles, setRoles] = useState<{ id: number; name: string }[]>([]);
-    const [enterprises, setEnterprises] = useState<{ id: number; name: string }[]>([]);
+    const [works, setWorks] = useState<Work[]>([]); // Alterando para Work[]
+    const [roles, setRoles] = useState<Role[]>([]); // Alterando para Role[]
+    const [enterprises, setEnterprises] = useState<Enterprise[]>([]); // Alterando para Enterprise[]
     const [updatedEmployee, setUpdatedEmployee] = useState<Employee>(employee);
 
     useEffect(() => {
@@ -34,17 +49,17 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
         const fetchData = () => {
             try {
                 axios.get("http://localhost:8080/api/works")
-                    .then(function (response) {
+                    .then((response) => {
                         setWorks(response.data);
                     }).catch((error) => console.log(error));
 
                 axios.get("http://localhost:8080/api/enterprises")
-                    .then(function (response) {
+                    .then((response) => {
                         setEnterprises(response.data);
                     }).catch((error) => console.log(error));
 
                 axios.get("http://localhost:8080/api/roles")
-                    .then(function (response) {
+                    .then((response) => {
                         setRoles(response.data);
                     }).catch((error) => console.log(error));
 
@@ -55,6 +70,10 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        setUpdatedEmployee(employee); // Atualiza o estado sempre que a prop employee mudar
+    }, [employee]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -68,7 +87,9 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
         const selectedValue = e.target.value ? Number(e.target.value) : undefined;
         setUpdatedEmployee((prevState) => ({
             ...prevState,
-            [field]: selectedValue,
+            [field]: selectedValue
+                ? { id: selectedValue, name: "" } // Aqui estamos apenas ajustando o formato
+                : prevState[field], // Se não houver valor, mantemos o estado atual
         }));
     };
 
@@ -84,9 +105,9 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
                     birthDate: updatedEmployee.birthDate,
                     cpf: updatedEmployee.cpf,
                     phoneNumber: updatedEmployee.phoneNumber,
-                    role: { id: updatedEmployee.role_id },
-                    work: { id: updatedEmployee.work_id },
-                    enterprise: { id: updatedEmployee.enterprise_id },
+                    role: { id: updatedEmployee.role.id }, // Correção para passar o ID do cargo
+                    work: { id: updatedEmployee.work.id }, // Correção para passar o ID da obra
+                    enterprise: { id: updatedEmployee.enterprise.id }, // Correção para passar o ID da empresa
                 }
             );
             console.log("Funcionário atualizado com sucesso", response.data);
@@ -152,20 +173,20 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <SelectInputField
                         label="Obra"
-                        value={updatedEmployee.work_id}
-                        onChange={(e) => handleSelectChange(e, "work_id")}
+                        value={updatedEmployee.work.id}
+                        onChange={(e) => handleSelectChange(e, "work")}
                         options={works}
                     />
                     <SelectInputField
                         label="Função"
-                        value={updatedEmployee.role_id}
-                        onChange={(e) => handleSelectChange(e, "role_id")}
+                        value={updatedEmployee.role.id}
+                        onChange={(e) => handleSelectChange(e, "role")}
                         options={roles}
                     />
                     <SelectInputField
                         label="Empresa"
-                        value={updatedEmployee.enterprise_id}
-                        onChange={(e) => handleSelectChange(e, "enterprise_id")}
+                        value={updatedEmployee.enterprise.id}
+                        onChange={(e) => handleSelectChange(e, "enterprise")}
                         options={enterprises}
                     />
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import NewEmployee from '../components/Employees/Form/NewEmployeeModal';
 import EmployeeTable from '../components/Employees/Table/EmployeeTable';
+import NewEmployeeModal from '../components/Employees/Form/NewEmployeeModal';
 
 const Employees: React.FC = () => {
     return (
@@ -9,7 +9,7 @@ const Employees: React.FC = () => {
             <div className="max-w-4xl mx-auto border bg-white p-6 rounded-md shadow-sm">
                 {/* Botão no canto superior direito */}
                 <div className="flex justify-end mb-4">
-                    <NewEmployee />
+                    <NewEmployeeModal />
                 </div>
                 {/* Tabela */}
                 <EmployeeTable />
