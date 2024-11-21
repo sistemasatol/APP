@@ -2,6 +2,8 @@ package com.atol.api.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @Entity
@@ -22,13 +24,16 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "enterprise_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Enterprise enterprise;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Role role;
 
     @ManyToOne
     @JoinColumn(name = "work_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Work work;
 }
