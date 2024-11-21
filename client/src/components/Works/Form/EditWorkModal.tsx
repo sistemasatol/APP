@@ -3,24 +3,24 @@ import axios from "axios";
 import InputField from "./InputField"; // Componente de campo de input
 import Modal from "./Modal"; // Modal genérico
 
-interface Role {
+interface Work {
     id: number;
     name: string;
 }
 
-interface EditRoleModalProps {
-    role: Role;
+interface EditWorkModalProps {
+    work: Work;
     onClose: () => void;
-    onUpdate: (updatedWork: Role) => void;
+    onUpdate: (updatedWork: Work) => void;
 }
 
-const EditRoleModal: React.FC<EditRoleModalProps> = ({ role, onClose, onUpdate }) => {
+const EditWorkModal: React.FC<EditWorkModalProps> = ({ work, onClose, onUpdate }) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const [updatedRole, setUpdatedRole] = useState<Role>(role);
+    const [updatedWork, setUpdatedWork] = useState<Work>(work);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setUpdatedRole((prevState) => ({
+        setUpdatedWork((prevState) => ({
             ...prevState,
             [name]: value,
         }));
@@ -30,24 +30,24 @@ const EditRoleModal: React.FC<EditRoleModalProps> = ({ role, onClose, onUpdate }
         e.preventDefault();
 
         try {
-            const response = await axios.put(`${backendUrl}/roles/${role.id}`, updatedRole);
-            console.log("Função atualizada com sucesso", response.data);
+            const response = await axios.put(`${backendUrl}/works/${work.id}`, updatedWork);
+            console.log("Obra atualizada com sucesso", response.data);
             onUpdate(response.data); // Atualiza a empresa na tabela
             onClose(); // Fecha o modal
         } catch (error) {
-            console.error("Erro ao atualizar função", error);
+            console.error("Erro ao atualizar obra", error);
         }
     };
 
     return (
-        <Modal isOpen={true} onClose={onClose} title="Editar Função">
+        <Modal isOpen={true} onClose={onClose} title="Editar Obra">
             <form onSubmit={handleSubmit} className="space-y-6">
                 <InputField
-                    label="Nome da Função"
+                    label="Nome da Obra"
                     name="name"
                     placeholder=""
                     type="text"
-                    value={updatedRole.name}
+                    value={updatedWork.name}
                     onChange={handleChange}
                 />
                 <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
@@ -58,4 +58,4 @@ const EditRoleModal: React.FC<EditRoleModalProps> = ({ role, onClose, onUpdate }
     );
 };
 
-export default EditRoleModal;
+export default EditWorkModal;
