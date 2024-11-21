@@ -1,10 +1,12 @@
 import './App.css'
-import Employees from './pages/Employees'
+// import Employees from './pages/Employees'
+import Enterprises from './pages/Enterprises'
 function App() {
 
   return (
     <div>
-      <Employees />
+      {/* <Employees /> */}
+      <Enterprises />
     </div>
   )
 }

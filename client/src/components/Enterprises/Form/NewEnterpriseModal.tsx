@@ -1,0 +1,98 @@
+import React, { useState } from "react";
+import InputField from "./InputField";
+import Button from "./Button";
+import Modal from "./Modal";
+import axios from "axios";
+
+interface Enterprise {
+  name: string;
+  phoneNumber: string;
+  cnpj: string;
+}
+
+export default function NewEnterpriseModal() {
+  const [enterprise, setEnterprise] = useState<Enterprise>({
+    name: "",
+    cnpj: "",
+    phoneNumber: "",
+  });
+
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEnterprise((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/enterprises", {
+        name: enterprise.name,
+        phoneNumber: enterprise.phoneNumber,
+        cnpj: enterprise.cnpj,
+      });
+      console.log("Empresa cadastrada com sucesso", response.data);
+      // Limpar formulário ou mostrar sucesso
+      setEnterprise({ name: "", cnpj: "", phoneNumber: "" });
+      setModalOpen(false); // Fecha o modal após cadastro
+    } catch (error: any) {
+      console.error(
+        "Erro ao cadastrar empresa",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  return (
+    <div className="p-4">
+      <button
+        onClick={() => setModalOpen(true)}
+        className="px-4 py-2 bg-blue-600 text-white rounded"
+      >
+        Cadastrar Nova Empresa
+      </button>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Cadastrar Nova Empresa"
+      >
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <InputField
+              placeholder="Digite o Nome"
+              type="text"
+              label="Nome da Empresa"
+              name="name"
+              value={enterprise.name}
+              onChange={handleChange}
+            />
+            <InputField
+              placeholder="Digite o CNPJ"
+              type="text"
+              label="CNPJ da Empresa"
+              name="cnpj"
+              value={enterprise.cnpj}
+              onChange={handleChange}
+            />
+            <InputField
+              placeholder="Digite o Número de Telefone"
+              type="text"
+              label="Telefone da Empresa"
+              name="phoneNumber"
+              value={enterprise.phoneNumber}
+              onChange={handleChange}
+            />
+          </div>
+
+          <Button type="submit" text="Cadastrar" />
+        </form>
+      </Modal>
+    </div>
+  );
+}
