@@ -1,5 +1,5 @@
 import React from 'react';
-import NewRoleModal from '../components/Roles/Form/NewEnterpriseModal';
+import NewRoleModal from '../components/Roles/Form/NewRoleModal';
 import RoleTable from '../components/Roles/Table/RoleTable';
 
 const Roles: React.FC = () => {

@@ -33,10 +33,11 @@ export default function NewRoleModal() {
       const response = await axios.post(`${backendUrl}/roles`, {
         name: role.name,
       });
-      console.log("Empresa cadastrada com sucesso", response.data);
+      console.log("Função cadastrada com sucesso", response.data);
       // Limpar formulário ou mostrar sucesso
       setRole({ name: "", id: -1});
       setModalOpen(false); // Fecha o modal após cadastro
+      window.location.reload(); 
     } catch (error: any) {
       console.error(
         "Erro ao cadastrar função",
@@ -57,14 +58,14 @@ export default function NewRoleModal() {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
-        title="Cadastrar Nova Empresa"
+        title="Cadastrar Nova Função"
       >
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputField
               placeholder="Digite o Nome"
               type="text"
-              label="Nome da Empresa"
+              label="Nome da Função"
               name="name"
               value={role.name}
               onChange={handleChange}

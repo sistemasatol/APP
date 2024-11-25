@@ -34,6 +34,7 @@ const EditRoleModal: React.FC<EditRoleModalProps> = ({ role, onClose, onUpdate }
             console.log("Função atualizada com sucesso", response.data);
             onUpdate(response.data); // Atualiza a empresa na tabela
             onClose(); // Fecha o modal
+            window.location.reload(); 
         } catch (error) {
             console.error("Erro ao atualizar função", error);
         }

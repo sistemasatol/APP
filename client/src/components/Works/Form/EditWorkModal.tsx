@@ -34,6 +34,7 @@ const EditWorkModal: React.FC<EditWorkModalProps> = ({ work, onClose, onUpdate }
             console.log("Obra atualizada com sucesso", response.data);
             onUpdate(response.data); // Atualiza a empresa na tabela
             onClose(); // Fecha o modal
+            window.location.reload();
         } catch (error) {
             console.error("Erro ao atualizar obra", error);
         }

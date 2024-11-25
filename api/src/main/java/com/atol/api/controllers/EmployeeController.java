@@ -23,8 +23,8 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-    // Método para buscar funcionários filtrados por workId
-    @GetMapping("/work")  // Mudança aqui para '/work' para filtrar por workId
+
+    @GetMapping("/work")
     public List<Employee> getEmployeeByWorkId(@RequestParam Long workId) {
         return employeeService.findByWorkId(workId);
     }

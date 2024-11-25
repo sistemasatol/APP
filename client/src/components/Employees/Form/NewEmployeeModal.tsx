@@ -120,7 +120,7 @@ export default function NewEmployeeModal() {
                 enterprise: { id: employee.enterprise_id }
             });
             console.log("Funcionário cadastrado com sucesso", response.data);
-            // Aqui você pode limpar o formulário ou mostrar um sucesso para o usuário
+            window.location.reload();
         } catch (error: any) {
             console.error("Erro ao Cadastrar Funcionário", error.response ? error.response.data : error.message);
         }

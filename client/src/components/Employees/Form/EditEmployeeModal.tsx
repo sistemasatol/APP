@@ -115,6 +115,7 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose
             console.log("Funcionário atualizado com sucesso", response.data);
             onUpdate(response.data); // Atualiza a tabela de funcionários
             onClose(); // Fecha o modal
+            window.location.reload();
         } catch (error) {
             console.error("Erro ao atualizar funcionário", error);
         }

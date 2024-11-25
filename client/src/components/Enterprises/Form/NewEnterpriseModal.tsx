@@ -43,6 +43,7 @@ export default function NewEnterpriseModal() {
       // Limpar formulário ou mostrar sucesso
       setEnterprise({ name: "", cnpj: "", phoneNumber: "" });
       setModalOpen(false); // Fecha o modal após cadastro
+      window.location.reload(); 
     } catch (error: any) {
       console.error(
         "Erro ao cadastrar empresa",

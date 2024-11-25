@@ -37,6 +37,7 @@ export default function NewWorkModal() {
       // Limpar formulário ou mostrar sucesso
       setWork({ name: "", id: -1 });
       setModalOpen(false); // Fecha o modal após cadastro
+      window.location.reload();
     } catch (error: any) {
       console.error(
         "Erro ao cadastrar função",

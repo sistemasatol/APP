@@ -38,6 +38,7 @@ const EditEnterpriseModal: React.FC<EditEnterpriseModalProps> = ({ enterprise, o
             console.log("Empresa atualizada com sucesso", response.data);
             onUpdate(response.data); // Atualiza a empresa na tabela
             onClose(); // Fecha o modal
+            window.location.reload(); 
         } catch (error) {
             console.error("Erro ao atualizar empresa", error);
         }
