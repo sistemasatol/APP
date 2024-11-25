@@ -14,10 +14,9 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**") // Mapeie os endpoints necessários
-                        .allowedOrigins("http://localhost:5173") // Permita o front-end
+                        .allowedOrigins("*") // Permita o front-end com o protocolo
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
-                        .allowedHeaders("*") // Permitir todos os headers
-                        .allowCredentials(true); // Permitir envio de cookies (se necessário)
+                        .allowedHeaders("*");// Permitir todos os header
             }
         };
     }

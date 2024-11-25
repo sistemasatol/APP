@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import InputField from "./InputField"; // Componente de campo de input
-import SelectInputField from "./SelectInputField"; // Componente de select
-import Button from "./Button";
+import InputField from "../../Global_Components/InputField"; // Componente de campo de input
+import SelectInputField from "../../Global_Components/SelectInputField"; // Componente de select
+import Button from "../../Global_Components/Button";
 import Modal from "./Modal";
 
 interface Work {

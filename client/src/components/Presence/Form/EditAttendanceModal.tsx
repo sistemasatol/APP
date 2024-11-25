@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import InputField from "../../Enterprises/Form/InputField";
+import InputField from "../../Global_Components/InputField";
 import Modal from "../../Employees/Form/Modal";
 
 interface Work {
