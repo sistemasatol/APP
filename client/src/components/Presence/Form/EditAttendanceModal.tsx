@@ -35,6 +35,7 @@ export default function EditAttendanceModal({
     const [selectedWork, setSelectedWork] = useState<Work | null>(null);
     const [date, setDate] = useState<string>("");
     const [employees, setEmployees] = useState<string[]>([]);
+    const [newEmployee, setNewEmployee] = useState<string>(""); // Estado para o valor do novo funcionário
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -85,6 +86,13 @@ export default function EditAttendanceModal({
         }
     };
 
+    const handleAddEmployee = () => {
+        if (newEmployee.trim() !== "") {
+            setEmployees((prev) => [...prev, newEmployee.trim()]);
+            setNewEmployee(""); // Limpa o campo de input
+        }
+    };
+
     return (
         <Modal isOpen={isOpen} onClose={onClose} title="Editar Lista de Presença">
             <form className="space-y-6">
@@ -132,10 +140,16 @@ export default function EditAttendanceModal({
                         placeholder="Nome do Funcionário"
                         type="text"
                         label="Adicionar Funcionário"
-                        value=""
-                        onChange={(e) => setEmployees((prev) => [...prev, e.target.value.trim()])}
-
+                        value={newEmployee}
+                        onChange={(e) => setNewEmployee(e.target.value)} // Atualiza o valor do input
                     />
+                    <button
+                        type="button"
+                        onClick={handleAddEmployee}
+                        className="px-4 py-2 mt-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all"
+                    >
+                        Adicionar Funcionário
+                    </button>
                     <ul className="space-y-2 mt-2">
                         {employees.map((emp, index) => (
                             <li
