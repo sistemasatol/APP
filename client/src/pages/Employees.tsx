@@ -5,8 +5,8 @@ import NewEmployeeModal from '../components/Employees/Form/NewEmployeeModal';
 const Employees: React.FC = () => {
     return (
         <div className="min-h-screen bg-gray-50 p-6">
-            {/* Contêiner da tabela */}
-            <div className="max-w-4xl mx-auto border bg-white p-6 rounded-md shadow-sm">
+           
+            <div className="max-w-full  mx-auto border bg-white p-6 rounded-md shadow-sm">
                 <div className="flex justify-start absolute mb-4">
                     <h1 className='px-4 py-2 p-4 text-4xl'>Funcionários</h1>
                 </div>
@@ -15,7 +15,7 @@ const Employees: React.FC = () => {
                 <div className="flex justify-end mb-4">
                     <NewEmployeeModal />
                 </div>
-                {/* Tabela */}
+            
                 <EmployeeTable />
             </div>
         </div>

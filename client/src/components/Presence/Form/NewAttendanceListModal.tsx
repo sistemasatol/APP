@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InputField from "../../Global_Components/InputField";
-import Modal from "../../Employees/Form/Modal";
+import Modal from "../../Global_Components/Modal";
 
 interface Work {
   name: string;

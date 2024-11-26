@@ -3,7 +3,7 @@ import axios from "axios";
 import InputField from "../../Global_Components/InputField"; // Componente de campo de input
 import SelectInputField from "../../Global_Components/SelectInputField"; // Componente de select
 import Button from "../../Global_Components/Button";
-import Modal from "./Modal";
+import Modal from "../../Global_Components/Modal";
 
 interface Work {
     id: number;

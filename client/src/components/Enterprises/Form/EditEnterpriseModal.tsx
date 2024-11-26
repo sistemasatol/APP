@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import InputField from "./InputField"; // Componente de campo de input
+import { InputField } from "../../Global_Components";
 import Modal from "./Modal"; // Modal genérico
 
 interface Enterprise {

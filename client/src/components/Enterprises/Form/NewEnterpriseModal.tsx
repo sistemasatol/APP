@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import InputField from "./InputField";
-import Button from "./Button";
+import { InputField, Button } from "../../Global_Components";
 import Modal from "./Modal";
 import axios from "axios";
 
