@@ -1,7 +1,6 @@
 import React from 'react';
-import PresencesList from '../components/Presence/Table/AttendanceList';
-import NewPresenceListModal from '../components/Presence/Form/NewAttendanceListModal';
-// import NewPresenceListModal from '../components/Presence/Form/NewPresenceListModal'; // Aqui você vai adicionar seu componente modal de nova presença
+import AttendancesTable from '../components/Table/AttendancesTable';
+import CreatePresence from '../components/Form/Create/CreatePresence';
 
 const Attendances: React.FC = () => {
   return (
@@ -14,12 +13,12 @@ const Attendances: React.FC = () => {
 
           {/* Botão no canto superior direito */}
           <div className="flex justify-end">
-            <NewPresenceListModal /> 
+            <CreatePresence /> 
           </div>
         </div>
 
         {/* Tabela de presenças */}
-        <PresencesList />
+        <AttendancesTable />
       </div>
     </div>
   );

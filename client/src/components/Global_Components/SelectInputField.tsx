@@ -2,9 +2,9 @@ import React from 'react';
 
 interface SelectInputFieldProps {
   label: string;
-  value: number; // O valor selecionado, representando o ID da opção
+  value?: number | string; // O valor selecionado, representando o ID da opção
   options: { id: number; name: string }[]; // Lista de opções para o select
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void; // Função chamada ao alterar o valor
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void; // Função chamada ao alterar o valor
 }
 
 const SelectInputField: React.FC<SelectInputFieldProps> = ({ label, value, onChange, options }) => {

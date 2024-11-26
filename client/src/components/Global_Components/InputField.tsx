@@ -3,7 +3,7 @@ import React from 'react';
 interface InputFieldProps {
   label: string;
   type: string;
-  value: string | undefined;
+  value: string | number | undefined;
   name: string; // Adicionado para suporte à identificação do campo
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
