@@ -14,6 +14,7 @@ const Enterprises: React.FC = () => {
                 {/* Botão no canto superior direito */}
                 <div className="flex justify-end mb-4">
                     <CreateEnterprise />
+            
                 </div>
                 {/* Tabela */}
                 <EnterpriseTable />

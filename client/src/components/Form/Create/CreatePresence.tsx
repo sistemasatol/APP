@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import InputField from "../../Global_Components/InputField";
 import Modal from "../../Global_Components/Modal";
-
+import FileUpload from "../../Global_Components/FileUpload";
 interface Work {
   name: string;
   id: number;
@@ -17,7 +17,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export default function CreatePresence() {
 
-  
+
   const [works, setWorks] = useState<Work[]>([]);
   const [responsibles, setResponsibles] = useState<Responsible[]>([]);
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
@@ -178,10 +178,12 @@ export default function CreatePresence() {
                   </li>
                 ))}
               </ul>
+
             </div>
           )}
 
           <div className="flex justify-end space-x-4">
+            <FileUpload />
             <button
               onClick={() => setModalOpen(false)}
               className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-all"

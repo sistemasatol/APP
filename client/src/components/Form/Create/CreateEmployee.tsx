@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../../Global_Components/Modal";
 import { Button, InputField, SelectInputField } from "../../Global_Components";
-import useFetchData from "../../../hooks/useFetchData";
 interface Employee {
     name: string;
     lastName: string | undefined;
