@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Employees from './pages/Employees'
-import Enterprises from './pages/Enterprises'
-import Roles from './pages/Roles'
-import Works from './pages/Works'
-import Presence from './pages/Attendances'
+import Funcionarios from './pages/Funcionarios'
+import Empresas from './pages/Empresas'
+import Cargos from './pages/Cargos'
+import Obras from './pages/Obras'
+import ListaDePresencaPage from './pages/ListaDePresencaPage'
 import Layout from './pages/Layout'
 
 function App() {
@@ -15,11 +15,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />} path="/">
-            <Route element={<Employees />} path="/funcionarios" />
-            <Route element={<Enterprises />} path="/empresas" />
-            <Route element={<Roles />} path="/funcoes" />
-            <Route element={<Works />} path="/obras" />
-            <Route element={<Presence />} path="/lista-de-presenca" />
+            <Route element={<Funcionarios />} path="/funcionarios" />
+            <Route element={<Empresas />} path="/empresas" />
+            <Route element={<Cargos />} path="/cargos" />
+            <Route element={<Obras />} path="/obras" />
+            <Route element={<ListaDePresencaPage />} path="/lista-de-presenca" />
           </Route>
         </Routes>
       </BrowserRouter>

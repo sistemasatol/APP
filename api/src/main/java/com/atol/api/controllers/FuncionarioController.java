@@ -45,10 +45,4 @@ public class FuncionarioController {
         funcionarioService.deletarFuncionario(id);
         return ResponseEntity.noContent().build();
     }
-
-    @GetMapping("/obra/{obraId}")
-    public ResponseEntity<List<Funcionario>> buscarFuncionarioPeloObraId(@PathVariable Long obraId) {
-        List<Funcionario> funcionarios = funcionarioService.buscarFuncionarioPeloObraID(obraId);
-        return ResponseEntity.ok(funcionarios);
-    }
 }

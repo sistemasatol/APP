@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 
-import SideBar from "../components/Sidebar/Sidebar";
+import MenuLateral from "../components/MenuLateral/MenuLateral";
 
 const Layout = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
      
-      <SideBar />
+      <MenuLateral />
       <div className="flex flex-col flex-1">
       
         <main className="flex-grow p-6">

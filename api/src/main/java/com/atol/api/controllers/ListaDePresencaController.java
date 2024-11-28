@@ -1,11 +1,14 @@
 package com.atol.api.controllers;
 
+import com.atol.api.models.Anexo;
 import com.atol.api.models.ListaDePresenca;
 import com.atol.api.services.ListaDePresencaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +32,14 @@ public class ListaDePresencaController {
     }
 
     @PostMapping
-    public ResponseEntity<ListaDePresenca> criarListaDePresenca(@RequestBody ListaDePresenca listaDePresenca) {
-        ListaDePresenca novaLista = listaDePresencaService.criarListaDePresenca(listaDePresenca);
-        return ResponseEntity.ok(novaLista);
+    public ResponseEntity<ListaDePresenca> criarListaDePresenca(@RequestPart ListaDePresenca listaDePresenca, @RequestPart MultipartFile anexo) {
+        try {
+            ListaDePresenca novaLista = listaDePresencaService.criarListaDePresenca(listaDePresenca, anexo);
+            return ResponseEntity.ok(novaLista);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @PutMapping("/{id}")

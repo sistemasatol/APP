@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,12 +18,12 @@ public class ListaDePresenca {
 
     private String responsavel;
 
+
     @Column(name = "criado_em")
-    private LocalDateTime criadoEm = LocalDateTime.now();
+    private LocalDate criadoEm = LocalDate.now();
 
     private Integer qtdFuncionarios;
-
-
+    
     @ManyToOne
     @JoinColumn(name = "obra_id", nullable = false)
     private Obra obra;

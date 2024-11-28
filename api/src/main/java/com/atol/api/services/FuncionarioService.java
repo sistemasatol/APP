@@ -32,8 +32,6 @@ public class FuncionarioService {
     public void deletarFuncionario(Long id) {
         funcionarioRepository.deleteById(id);
     }
-    public List<Funcionario> buscarFuncionarioPeloObraID(Long obra_id) {
-        return funcionarioRepository.buscarPeloObraId(obra_id);
-    }
+
 
 }
