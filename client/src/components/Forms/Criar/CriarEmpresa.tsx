@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { InputField, Button, Modal } from "../../ComponentesGlobais";
 import axios from "axios";
 import { Empresa } from "../../../types";
+import InputCNPJ from "../../ComponentesGlobais/Inputs/InputCNPJ";
 
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -71,11 +72,9 @@ export default function CriarEmpresa() {
               value={empresa.nome}
               onChange={handleChange}
             />
-            <InputField
-              placeholder="Digite o CNPJ"
+            <InputCNPJ
               type="text"
-              label="CNPJ da Empresa"
-              name="cnpj"
+              name="cpf"
               value={empresa.cnpj}
               onChange={handleChange}
             />

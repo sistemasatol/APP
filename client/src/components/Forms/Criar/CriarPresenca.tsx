@@ -3,6 +3,7 @@ import axios from "axios";
 import InputField from "../../ComponentesGlobais/InputField";
 import Modal from "../../ComponentesGlobais/Modal";
 import { Funcionario, Obra } from "../../../types";
+import UploadArquivos from "../../ComponentesGlobais/UploadArquivos";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -14,7 +15,15 @@ export default function CriarPresenca() {
   const [nomeFuncionario, setNomeFuncionario] = useState<string>("");
   const [funcionarios, setFuncionarios] = useState<string[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [anexo, setAnexo] = useState<File | null>(null);
+  const [anexo, setAnexo] = useState<File | null>(null);  // Alterado para armazenar um único arquivo
+
+  const handleFileSelect = (selectedFiles: File[]) => {
+    // Alterado para tratar apenas um arquivo
+    if (selectedFiles.length > 0) {
+      setAnexo(selectedFiles[0]);
+      console.log("Arquivo selecionado:", selectedFiles[0]);
+    }
+  };
 
   useEffect(() => {
     const fetchObras = async () => {
@@ -37,8 +46,6 @@ export default function CriarPresenca() {
       setNomeFuncionario("");
     }
   };
-
-
 
   const handleSavePresencaList = async () => {
     if (!selectedResponsavel || !selectedObra) {
@@ -71,17 +78,6 @@ export default function CriarPresenca() {
       alert("Erro ao salvar a Lista de Presença");
     }
   };
-
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-    const arquivo = e.target.files?.[0];
-    if (arquivo) {
-      setAnexo(arquivo);
-
-    }
-
-  }
 
   return (
     <div className="p-4">
@@ -184,14 +180,10 @@ export default function CriarPresenca() {
               Cancelar
             </button>
 
-            <input
-              type="file"
-              onChange={handleFileChange}
-              className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-all"
-            />
+            <UploadArquivos onFileSelect={handleFileSelect} />
 
             {anexo && (
-              <div className="small">Arquivo selecionado:", {anexo.name}</div>
+              <div className="small">Arquivo selecionado: {anexo.name}</div>
             )}
 
             <button

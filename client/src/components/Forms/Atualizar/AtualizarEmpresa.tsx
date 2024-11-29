@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { InputField, Modal } from "../../ComponentesGlobais";
 import { Empresa, AtualizarEmpresaProps } from "../../../types";
+import InputCNPJ from "../../ComponentesGlobais/Inputs/InputCNPJ";
 
 
 
@@ -21,13 +22,13 @@ const AtualizarEmpresa: React.FC<AtualizarEmpresaProps> = ({ empresa, onClose, o
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+        console.log(empresa.cnpj)
         try {
             const response = await axios.put(`${backendUrl}/empresas/${empresa.id}`, updatedEmpresa);
             console.log("Empresa atualizada com sucesso", response.data);
             onUpdate(response.data); // Atualiza a empresa na tabela
             onClose(); // Fecha o modal
-            window.location.reload(); 
+            window.location.reload();
         } catch (error) {
             console.error("Erro ao atualizar empresa", error);
         }
@@ -44,11 +45,9 @@ const AtualizarEmpresa: React.FC<AtualizarEmpresaProps> = ({ empresa, onClose, o
                     value={updatedEmpresa.nome}
                     onChange={handleChange}
                 />
-                <InputField
-                    label="CNPJ"
-                    name="cnpj"
-                    placeholder=""
+                <InputCNPJ
                     type="text"
+                    name="cpf"
                     value={updatedEmpresa.cnpj}
                     onChange={handleChange}
                 />

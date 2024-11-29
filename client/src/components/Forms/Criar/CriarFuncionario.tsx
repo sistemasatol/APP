@@ -3,6 +3,8 @@ import axios from "axios";
 import Modal from "../../ComponentesGlobais/Modal";
 import { Button, InputField, SelectInputField } from "../../ComponentesGlobais";
 import { Funcionario, Cargo, Empresa, Obra } from "../../../types";
+import InputTelefone from "../../ComponentesGlobais/Inputs/InputTelefone";
+import InputCPF from "../../ComponentesGlobais/Inputs/InputCPF";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -130,18 +132,15 @@ export default function CriarFuncionario() {
                             value={funcionario.sobrenome}
                             onChange={handleChange}
                         />
-                        <InputField
-                            placeholder="Digite o CPF"
+                        <InputCPF
                             type="text"
-                            label="CPF"
                             name="cpf"
                             value={funcionario.cpf}
                             onChange={handleChange}
                         />
-                        <InputField
+                        <InputTelefone
                             placeholder="Digite o Número de Telefone"
                             type="text"
-                            label="Telefone"
                             name="telefone"
                             value={funcionario.telefone}
                             onChange={handleChange}

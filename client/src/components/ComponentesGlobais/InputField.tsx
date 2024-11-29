@@ -10,10 +10,10 @@ const InputField: React.FC<InputFieldProps> = ({ label, type, value, name, place
       <input
         type={type}
         value={value}
-        name={name} // Necessário para identificar o campo no handleChange
+        name={name}
         onChange={onChange}
         placeholder={placeholder}
-        className="mt-1 mb-4 block w-full px-4 py-2 border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="mt-1 mb-4 block w-full px-4 py-2 border border-gray-300 shadow-sm "
         
       />
     </div>
